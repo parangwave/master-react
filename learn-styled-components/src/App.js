@@ -4,23 +4,31 @@ const Parent = styled.div`
   display: flex;
 `;
 
-// adapting props
-const Box = styled.div`
-  background-color: teal;
-  width: 100px;
-  height: 100px;
+const Btn = styled.button`
+  color: white;
+  background-color: tomato;
+  border: 0;
+  border-radius: 15px;
 `;
 
-// extending comp using styled()
-const Circle = styled(Box)`
-  border-radius: 50%;
+// send html tag attributes
+const Input = styled.input.attrs({ required: true, minLength: 10 })`
+  background-color: tomato;
 `;
 
 function App() {
   return (
-    <Parent>
-      <Box bgColor="teal" />
-      <Circle bgColor="tomato" />
+    <Parent as="header">
+      <Btn>Login</Btn>
+      {/* change tag name */}
+      <Btn as="a" href="#">
+        Login
+      </Btn>
+      <Input />
+      <Input />
+      <Input />
+      <Input />
+      <Input />
     </Parent>
   );
 }
