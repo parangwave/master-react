@@ -1,18 +1,28 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
-import Home from "./screens/Home";
+import { createBrowserRouter } from "react-router-dom";
+import Root from "./Root";
 import About from "./screens/About";
+import Home from "./screens/Home";
 
-function Router() {
-  return (
-    <BrowserRouter>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-      </Routes>
-    </BrowserRouter>
-  );
-}
+// func that makes the browser more declarative without jsx comps
+// router to arr[] (= js obj)
+const router = createBrowserRouter([
+  {
+    // 1. first render "/"
+    // a container of all routes
+    path: "/", // parent, url itself
+    element: <Root />,
 
-export default Router;
+    children: [
+      {
+        path: "",
+        element: <Home />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+    ],
+  },
+]);
+
+export default router;
