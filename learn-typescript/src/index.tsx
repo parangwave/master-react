@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import { ThemeProvider } from "styled-components";
+import { lightTheme, darkTheme } from "./theme";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -8,7 +10,10 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <>
-    <App />
+    {/* ThemeProvider = styled-component로 부터 오는 하나의 comp */}
+    <ThemeProvider theme={darkTheme}>
+      <App />
+    </ThemeProvider>
   </>
 );
 
