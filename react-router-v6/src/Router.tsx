@@ -5,6 +5,7 @@ import Home from "./screens/Home";
 import NotFound from "./screens/NotFound";
 import ErrorComponent from "./components/ErrorComponent";
 import User from "./screens/users/User";
+import Followers from "./screens/users/Followers";
 
 // func that makes the browser more declarative without jsx comps
 // router to arr[] (= js obj)
@@ -32,6 +33,12 @@ const router = createBrowserRouter([
         // recieve info from url
         path: "users/:userId",
         element: <User />,
+        children: [
+          {
+            path: "followers",
+            element: <Followers />,
+          },
+        ],
       },
     ],
 

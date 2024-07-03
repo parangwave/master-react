@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, Outlet, useParams } from "react-router-dom";
 import { users } from "../../db";
 
 export default function User() {
@@ -7,8 +7,15 @@ export default function User() {
   console.log(userId);
 
   return (
-    <h1>
-      User with it {userId} is named: {users[Number(userId) - 1].name}
-    </h1>
+    <div>
+      <h1>
+        User with it {userId} is named: {users[Number(userId) - 1].name}
+      </h1>
+      <hr />
+      {/* relative url: current url + this path  */}
+      {/* "/followers" -> localhost:3000/followers */}
+      <Link to={"followers"}>See Followers</Link>
+      <Outlet />
+    </div>
   );
 }
