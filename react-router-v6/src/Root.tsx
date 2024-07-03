@@ -6,7 +6,11 @@ function Root() {
     <div>
       <Header />
       {/* 2. render children comp (= url you want) */}
-      <Outlet />
+      <Outlet
+        context={{
+          darkmode: true,
+        }}
+      />
     </div>
   );
 }
