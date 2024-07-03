@@ -4,6 +4,7 @@ import About from "./screens/About";
 import Home from "./screens/Home";
 import NotFound from "./screens/NotFound";
 import ErrorComponent from "./components/ErrorComponent";
+import User from "./screens/users/User";
 
 // func that makes the browser more declarative without jsx comps
 // router to arr[] (= js obj)
@@ -25,6 +26,12 @@ const router = createBrowserRouter([
       {
         path: "about",
         element: <About />,
+      },
+      {
+        // tell react-router, this url can have "dynamic parameter"
+        // recieve info from url
+        path: "users/:userId",
+        element: <User />,
       },
     ],
 
