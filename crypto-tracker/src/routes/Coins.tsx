@@ -27,7 +27,8 @@ const Coin = styled.li`
     padding: 20px;
     font-weight: 600;
     transition: all 0.2s ease-in-out;
-    display: block;
+    display: flex;
+    align-items: center;
   }
 
   &:hover {
@@ -48,6 +49,12 @@ const Loader = styled.span`
   font-weight: 600;
   text-align: center;
   display: block;
+`;
+
+const Img = styled.img`
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
 `;
 
 interface CoinInterface {
@@ -85,7 +92,20 @@ export default function Coins() {
         <CoinsList>
           {coins.map((coin) => (
             <Coin key={coin.id}>
-              <Link to={`/:${coin.id}`}>{coin.name} &rarr;</Link>
+              <Link
+                to={{
+                  pathname: `/${coin.id}`,
+                  // when open this page && transferred w/ click,
+                  // send state(or string, obj) to other screens
+                  state: { name: coin.name }, // no effect when screen trasition
+                }}
+              >
+                <Img
+                  // src={`https://cryptoicon-api.pages.dev/api/icon/${coin.symbol.toLowerCase()}`}
+                  src={`https://cryptocurrencyliveprices.com/img/${coin.id.toLocaleLowerCase()}.png`}
+                />
+                {coin.name} &rarr;
+              </Link>
             </Coin>
           ))}
         </CoinsList>
