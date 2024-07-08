@@ -15,9 +15,8 @@ function App() {
     <>
       {/* apply global style for whole doc */}
       <ThemeProvider theme={isDark ? darkTheme : lightTheme}>
-        <button onClick={toggleTheme}>Toggle Theme</button>
         <GlobalStyle />
-        <Router />
+        <Router isDark={isDark} toggleTheme={toggleTheme} />
         <ReactQueryDevtools initialIsOpen={true} />
       </ThemeProvider>
     </>
