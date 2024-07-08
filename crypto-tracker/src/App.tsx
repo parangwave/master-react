@@ -1,6 +1,8 @@
 import Router from "./Router";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { ThemeProvider } from "styled-components";
+
+// Recoil
 import { useRecoilValue } from "recoil";
 import { isDarkAtom } from "./atoms";
 
@@ -9,7 +11,7 @@ import GlobalStyle from "./GlobalStyle";
 import { lightTheme, darkTheme } from "./theme";
 
 function App() {
-  const isDark = useRecoilValue(isDarkAtom); // connected to isDarkAtom
+  const isDark = useRecoilValue(isDarkAtom); // connected to isDarkAtom, listening for atom's val
 
   return (
     <>
