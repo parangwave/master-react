@@ -11,6 +11,7 @@ import GlobalStyle from "./GlobalStyle";
 import { lightTheme, darkTheme } from "./theme";
 
 function App() {
+  // useRecoilValue: getter
   const isDark = useRecoilValue(isDarkAtom); // connected to isDarkAtom, listening for atom's val
 
   return (

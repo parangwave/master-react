@@ -74,7 +74,8 @@ interface ICoin {
 interface ICoinsProps {}
 
 export default function Coins() {
-  const setDarkAtom = useSetRecoilState(isDarkAtom); // modifying atom's val
+  // useSetRecoilState: setter
+  const setDarkAtom = useSetRecoilState(isDarkAtom); // function modifying atom's val
   const toggleDarkAtom = () => setDarkAtom((prev) => !prev);
   const { isLoading, data } = useQuery<ICoin[]>("allCoins", fetchCoins);
 
