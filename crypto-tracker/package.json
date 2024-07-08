@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-transform-private-property-in-object": "^7.24.7",
     "@types/react-router-dom": "^5.3.3",
     "@types/styled-components": "^5.1.34"
   }

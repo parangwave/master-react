@@ -42,7 +42,7 @@ const Loader = styled.span`
 const Overview = styled.div`
   display: flex;
   justify-content: space-between;
-  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: ${(props) => props.theme.boxShadow};
   padding: 20px;
   border-radius: 10px;
 `;
@@ -91,7 +91,7 @@ const Tab = styled.span<{ isActive: boolean }>`
   text-align: center;
   text-transform: uppercase;
   font-size: 20px;
-  background-color: rgba(0, 0, 0, 0.5);
+  box-shadow: ${(props) => props.theme.boxShadow};
   padding: 10px;
   border-radius: 10px;
   transition: all 0.3s ease-in-out;
