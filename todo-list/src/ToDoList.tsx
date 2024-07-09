@@ -40,23 +40,47 @@ export default function ToDoList() {
 */
 
 export default function ToDoList() {
-  const { register, watch } = useForm();
+  const { register, watch, handleSubmit, formState } = useForm();
   //   console.log(register("ToDo")); // register() returns input's value as Obj { onBlur, onChange ... }
   //   console.log(watch()); // track form value
+  const onValid = (data: any) => {
+    console.log(data);
+  };
+  console.log(formState.errors);
+
   return (
     <div>
-      <form>
-        <input {...register("email")} placeholder="email" />
-        <button>Add</button>
-        <input {...register("firstName")} placeholder="firstName" />
-        <button>Add</button>
-        <input {...register("lastName")} placeholder="lastName" />
-        <button>Add</button>
-        <input {...register("username")} placeholder="username" />
-        <button>Add</button>
-        <input {...register("password")} placeholder="password" />
-        <button>Add</button>
-        <input {...register("passwordCheck")} placeholder="passwordCheck" />
+      <form
+        onSubmit={handleSubmit(onValid)}
+        style={{ display: "flex", flexDirection: "column" }}
+      >
+        <input {...register("email", { required: true })} placeholder="email" />
+        <input
+          {...register("firstName", { required: true })}
+          placeholder="firstName"
+        />
+        <input
+          {...register("lastName", { required: true })}
+          placeholder="lastName"
+        />
+        <input
+          {...register("username", { required: true, minLength: 10 })}
+          placeholder="username"
+        />
+        <input
+          {...register("password", { required: true, minLength: 5 })}
+          placeholder="password"
+        />
+        <input
+          {...register("passwordCheck", {
+            required: "Password is required",
+            minLength: {
+              value: 5,
+              message: "Your password is too short.",
+            },
+          })}
+          placeholder="passwordCheck"
+        />
         <button>Add</button>
       </form>
     </div>
