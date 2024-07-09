@@ -39,14 +39,32 @@ export default function ToDoList() {
 }
 */
 
+interface IForm {
+  email: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  passwordCheck: string;
+}
+
 export default function ToDoList() {
-  const { register, watch, handleSubmit, formState } = useForm();
+  const {
+    register,
+    watch,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IForm>({
+    defaultValues: {
+      email: "@naver.com",
+    },
+  });
   //   console.log(register("ToDo")); // register() returns input's value as Obj { onBlur, onChange ... }
   //   console.log(watch()); // track form value
   const onValid = (data: any) => {
     console.log(data);
   };
-  console.log(formState.errors);
+  //   console.log(formState.errors);
 
   return (
     <div>
@@ -54,23 +72,37 @@ export default function ToDoList() {
         onSubmit={handleSubmit(onValid)}
         style={{ display: "flex", flexDirection: "column" }}
       >
-        <input {...register("email", { required: true })} placeholder="email" />
         <input
-          {...register("firstName", { required: true })}
+          {...register("email", {
+            required: "Email is required",
+            pattern: {
+              value: /^[A-Za-z0-9._%+-]+@naver.com$/,
+              message: "Only naver.com emails allowed",
+            },
+          })}
+          placeholder="Email"
+        />
+        <span>{errors?.email?.message}</span>
+        <input
+          {...register("firstName", { required: "write here" })}
           placeholder="firstName"
         />
+        <span>{errors?.firstName?.message}</span>
         <input
-          {...register("lastName", { required: true })}
+          {...register("lastName", { required: "write here" })}
           placeholder="lastName"
         />
+        <span>{errors?.lastName?.message}</span>
         <input
-          {...register("username", { required: true, minLength: 10 })}
+          {...register("username", { required: "write here", minLength: 10 })}
           placeholder="username"
         />
+        <span>{errors?.username?.message}</span>
         <input
-          {...register("password", { required: true, minLength: 5 })}
+          {...register("password", { required: "write here", minLength: 5 })}
           placeholder="password"
         />
+        <span>{errors?.password?.message}</span>
         <input
           {...register("passwordCheck", {
             required: "Password is required",
@@ -81,6 +113,7 @@ export default function ToDoList() {
           })}
           placeholder="passwordCheck"
         />
+        <span>{errors?.passwordCheck?.message}</span>
         <button>Add</button>
       </form>
     </div>
