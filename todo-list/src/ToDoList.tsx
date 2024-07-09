@@ -46,6 +46,7 @@ interface IForm {
   username: string;
   password: string;
   passwordCheck: string;
+  extraError?: string; // error for whole form
 }
 
 export default function ToDoList() {
@@ -54,6 +55,7 @@ export default function ToDoList() {
     watch,
     handleSubmit,
     formState: { errors },
+    setError,
   } = useForm<IForm>({
     defaultValues: {
       email: "@naver.com",
@@ -61,8 +63,15 @@ export default function ToDoList() {
   });
   //   console.log(register("ToDo")); // register() returns input's value as Obj { onBlur, onChange ... }
   //   console.log(watch()); // track form value
-  const onValid = (data: any) => {
-    console.log(data);
+  const onValid = (data: IForm) => {
+    if (data.password !== data.passwordCheck) {
+      setError(
+        "passwordCheck",
+        { message: "Password are not the same" },
+        { shouldFocus: true } // force the form to foucs on selected
+      );
+    }
+    setError("extraError", { message: "Server offline." });
   };
   //   console.log(formState.errors);
 
@@ -84,7 +93,15 @@ export default function ToDoList() {
         />
         <span>{errors?.email?.message}</span>
         <input
-          {...register("firstName", { required: "write here" })}
+          {...register("firstName", {
+            required: "write here",
+            validate: {
+              noNico: (value) =>
+                value.includes("nico") ? "no nicos allowed" : true,
+              noNick: (value) =>
+                value.includes("nick") ? "no nick allowed" : true,
+            },
+          })}
           placeholder="firstName"
         />
         <span>{errors?.firstName?.message}</span>
@@ -115,6 +132,7 @@ export default function ToDoList() {
         />
         <span>{errors?.passwordCheck?.message}</span>
         <button>Add</button>
+        <span>{errors?.extraError?.message}</span>
       </form>
     </div>
   );
