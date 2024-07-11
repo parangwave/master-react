@@ -17,15 +17,29 @@ const Box = styled(motion.div)`
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 
+// variants = stage for animations
+// 컴포넌트가 가질 수 있는 미리 정의된 시각적 state
+// 1. help you clean code (mv setting to seperated js obj)
+const myVariants = {
+  start: {
+    scale: 0,
+  },
+  end: {
+    scale: 1,
+    rotateZ: 360,
+    transition: {
+      type: "spring",
+      delay: 1,
+    },
+  },
+};
+
 export default function App() {
   return (
     <Wrapper>
-      <Box
-        transition={{ type: "spring", delay: 1 }} // type default: spring (bouncing)
-        initial={{ scale: 0 }}
-        animate={{ scale: 1, rotateZ: 360 }}
-      />
-      {/* <Box transition={{ duration: 3 }} animate={{ borderRadius: "100px" }} /> */}
+      {/* initial="prop1", animate="prop2" */}
+      {/* prop1, prop2 must be in variants obj */}
+      <Box variants={myVariants} initial="start" animate="end" />
     </Wrapper>
   );
 }
