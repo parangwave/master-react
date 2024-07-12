@@ -1,9 +1,20 @@
 import styled from "styled-components";
-import { motion, spring, Variants } from "framer-motion";
+import { motion, Variants } from "framer-motion";
+import { useRef } from "react";
 
 const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const BiggerBox = styled.div`
+  width: 600px;
+  height: 600px;
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,22 +38,27 @@ const Box = styled(motion.div)`
 // 1. help you clean code (mv setting to seperated js obj)
 // 2. combine many animations
 const boxVariants: Variants = {
-  hover: { scale: 1.5, rotateZ: 90 },
-  click: { scale: 1, borderRadius: "100px" },
-  // numeric value when animate color
-  drag: { backgroundColor: "rgb(46, 204, 113)", transition: { duration: 5 } },
+  hover: { rotateZ: 90 },
+  click: { borderRadius: "100px" },
 };
 
 export default function App() {
+  const biggerBoxRef = useRef<HTMLDivElement>(null);
+
   return (
     <Wrapper>
-      <Box
-        drag
-        variants={boxVariants}
-        whileHover="hover"
-        whileDrag="drag"
-        whileTap="click"
-      />
+      <BiggerBox ref={biggerBoxRef}>
+        <Box
+          drag
+          dragSnapToOrigin
+          dragElastic={0}
+          // dragConstraints={{ top: -50, bottom: 50, left: -50, right: 50 }}
+          dragConstraints={biggerBoxRef}
+          variants={boxVariants}
+          whileHover="hover"
+          whileTap="click"
+        />
+      </BiggerBox>
     </Wrapper>
   );
 }
